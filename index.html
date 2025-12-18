@@ -1,4 +1,4 @@
-PE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -37,6 +37,18 @@ PE html>
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        .year-bar {
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%);
+            color: white; font-weight: bold; font-size: 0.85rem;
+            padding: 0.5rem; border-radius: 0.5rem;
+            margin-bottom: 1rem; position: relative;
+        }
+        .year-bar::after {
+            content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+            border-width: 6px 6px 0; border-style: solid; border-color: #8B5CF6 transparent transparent transparent;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -141,40 +153,55 @@ PE html>
             </div>
 
             <div class="relative space-y-24">
-                <!-- STEP 1 -->
+                
+                <!-- STEP 1: Search & Design (Image Applied Here!) -->
                 <div class="flex flex-col md:flex-row items-stretch gap-8 group">
                     <div class="w-full md:w-5/12 flex flex-col justify-center">
                         <div class="inline-block bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-full text-xs mb-3 w-fit">STEP 01. Input & Visualizing</div>
                         <h4 class="text-2xl font-bold text-slate-900 mb-3">주소 기반 도면 인식 및 3D화</h4>
-                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">사용자가 주소를 입력하면 전국 아파트 DB에서 평면도를 호출합니다. 이미지가 없더라도 수기 도면을 AI가 인식합니다.</p>
+                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                            사용자가 주소를 입력하면 전국 아파트 DB에서 평면도를 호출합니다. 
+                            이미지가 없더라도 사용자가 업로드한 손도면이나 낡은 이미지를 AI가 인식하여 즉시 3D 공간으로 변환합니다.
+                        </p>
+                        <!-- Deep Tech Box -->
                         <div class="bg-slate-900 rounded-xl p-5 border border-slate-700 shadow-lg relative overflow-hidden">
                             <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] px-2 py-1 font-bold rounded-bl">Deep Tech Strategy</div>
                             <div class="space-y-3">
-                                <div><div class="text-blue-400 text-xs font-bold mb-1"><i class="fas fa-eye mr-1"></i> Vision AI (Dark Data Mining)</div><p class="text-slate-400 text-[11px]">비정형 도면 이미지에서 벽체, 개구부, 치수 정보 벡터화</p></div>
+                                <div><div class="text-blue-400 text-xs font-bold mb-1"><i class="fas fa-eye mr-1"></i> Vision AI (Dark Data Mining)</div><p class="text-slate-400 text-[11px]">비정형 도면 이미지(Dark Data)에서 벽체, 개구부, 치수 정보를 벡터 데이터로 추출</p></div>
                                 <div><div class="text-purple-400 text-xs font-bold mb-1"><i class="fas fa-cube mr-1"></i> 3D Gaussian Splatting</div><p class="text-slate-400 text-[11px]">기존 Mesh 방식보다 10배 빠른 렌더링 속도로 실사급 3D 공간을 웹에서 즉시 구현</p></div>
                             </div>
                         </div>
                     </div>
+                    <!-- Visual: USING UPLOADED IMAGES -->
                     <div class="w-full md:w-7/12 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col relative h-80 md:h-auto group-hover:shadow-md transition">
-                        <img src="plan.png" class="absolute top-0 left-0 w-1/2 h-full object-cover opacity-80" alt="2D Plan">
-                        <img src="render.jpg" class="flex-1 relative bg-black rounded overflow-hidden h-full object-cover" alt="3D Generated Model">
+                        <!-- Left Image (Plan) -->
+                        <img src="plan.png" class="absolute top-0 left-0 w-1/2 h-full object-cover opacity-80 border-r border-slate-200" alt="2D Plan" onerror="this.src='https://images.unsplash.com/photo-1599809275372-baba0010cb28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                        <!-- Right Image (Render) -->
+                        <img src="render.jpg" class="absolute top-0 right-0 w-1/2 h-full object-cover" alt="3D Render" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                        <!-- Center Arrow -->
                         <div class="absolute inset-0 flex items-center justify-center"><div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg z-10 text-blue-600"><i class="fas fa-arrow-right"></i></div></div>
                     </div>
                 </div>
+
                 <!-- STEP 2 -->
                 <div class="flex flex-col md:flex-row-reverse items-stretch gap-8 group">
                     <div class="w-full md:w-5/12 flex flex-col justify-center md:text-right">
                         <div class="md:ml-auto inline-block bg-indigo-100 text-indigo-600 font-bold px-3 py-1 rounded-full text-xs mb-3 w-fit">STEP 02. Analysis & Costing</div>
                         <h4 class="text-2xl font-bold text-slate-900 mb-3">AI 설계 검증 및 물량 적산</h4>
-                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">디자인의 시공상 문제점(간섭, 철거불가)을 탐지하고, 자재 소요량을 정밀 계산하여 표준 견적서를 생성합니다.</p>
+                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                            완성된 디자인의 시공상 문제점(배관 간섭, 철거 불가벽 등)을 AI가 자동으로 탐지하여 수정하고, 
+                            자재 소요량을 정밀 계산하여 표준 견적서를 생성합니다.
+                        </p>
+                        <!-- Deep Tech Box -->
                         <div class="bg-slate-900 rounded-xl p-5 border border-slate-700 shadow-lg relative overflow-hidden text-left">
                             <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] px-2 py-1 font-bold rounded-bl">Deep Tech Strategy</div>
                             <div class="space-y-3">
-                                <div><div class="text-indigo-400 text-xs font-bold mb-1"><i class="fas fa-atom mr-1"></i> PINN (물리 기반 신경망)</div><p class="text-slate-400 text-[11px]">자재의 하중/구조/간섭 여부를 시뮬레이션하여 '시공 가능성' 검증</p></div>
-                                <div><div class="text-green-400 text-xs font-bold mb-1"><i class="fas fa-server mr-1"></i> Synthetic Data</div><p class="text-slate-400 text-[11px]">수백만 가지 가상 시공 시나리오로 견적 알고리즘 학습</p></div>
+                                <div><div class="text-indigo-400 text-xs font-bold mb-1"><i class="fas fa-atom mr-1"></i> PINN (물리 기반 신경망)</div><p class="text-slate-400 text-[11px]">자재의 하중/구조/간섭 여부를 물리 법칙 기반으로 시뮬레이션하여 '시공 가능성' 검증</p></div>
+                                <div><div class="text-green-400 text-xs font-bold mb-1"><i class="fas fa-server mr-1"></i> Synthetic Data</div><p class="text-slate-400 text-[11px]">수백만 가지의 가상 시공 시나리오를 생성하여 견적 알고리즘을 학습</p></div>
                             </div>
                         </div>
                     </div>
+                    <!-- Visual -->
                     <div class="w-full md:w-7/12 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6">
                         <div class="flex justify-between border-b pb-2 mb-4"><span class="font-bold text-slate-800">AI 자동 산출 내역서</span><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded flex items-center"><i class="fas fa-check-circle mr-1"></i> PINN 검증 완료</span></div>
                         <div class="space-y-3 text-sm">
@@ -183,20 +210,26 @@ PE html>
                         </div>
                     </div>
                 </div>
+
                 <!-- STEP 3 -->
                 <div class="flex flex-col md:flex-row items-stretch gap-8 group">
                     <div class="w-full md:w-5/12 flex flex-col justify-center">
                         <div class="inline-block bg-purple-100 text-purple-600 font-bold px-3 py-1 rounded-full text-xs mb-3 w-fit">STEP 03. Bidding & Contract</div>
                         <h4 class="text-2xl font-bold text-slate-900 mb-3">스마트 경쟁 입찰 & 전자계약</h4>
-                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">RFP가 파트너사에 발송됩니다. AI가 견적의 '적정가' 여부를 판별하고, 표준계약서 기반 전자계약을 체결합니다.</p>
+                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                            RFP(입찰제안서)가 파트너사에 발송됩니다. AI가 업체의 견적을 분석하여 '적정가' 여부를 판별하고, 
+                            표준계약서 기반의 전자계약을 체결합니다.
+                        </p>
+                        <!-- Deep Tech Box -->
                         <div class="bg-slate-900 rounded-xl p-5 border border-slate-700 shadow-lg relative overflow-hidden">
                             <div class="absolute top-0 right-0 bg-purple-600 text-white text-[10px] px-2 py-1 font-bold rounded-bl">Deep Tech Strategy</div>
                             <div class="space-y-3">
-                                <div><div class="text-purple-400 text-xs font-bold mb-1"><i class="fas fa-chart-line mr-1"></i> Price Regression Model</div><p class="text-slate-400 text-[11px]">빅데이터 회귀 분석으로 견적 이상치(덤탱이) 탐지</p></div>
+                                <div><div class="text-purple-400 text-xs font-bold mb-1"><i class="fas fa-chart-line mr-1"></i> Price Regression Model</div><p class="text-slate-400 text-[11px]">빅데이터 회귀 분석을 통해 견적의 이상치(덤탱이, 부실공사 우려) 탐지</p></div>
                                 <div><div class="text-blue-400 text-xs font-bold mb-1"><i class="fas fa-file-signature mr-1"></i> Automated Legal Tech</div><p class="text-slate-400 text-[11px]">공정위 표준 전자계약 자동 생성 및 해시(Hash) 연동</p></div>
                             </div>
                         </div>
                     </div>
+                    <!-- Visual -->
                     <div class="w-full md:w-7/12 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6">
                         <div class="flex justify-between items-center mb-6"><span class="font-bold text-slate-800">입찰 분석 리포트</span><span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-bold">AI 분석 완료</span></div>
                         <div class="space-y-4">
@@ -217,28 +250,42 @@ PE html>
                         </div>
                     </div>
                 </div>
+
                 <!-- STEP 4 -->
                 <div class="flex flex-col md:flex-row-reverse items-stretch gap-8 group">
                     <div class="w-full md:w-5/12 flex flex-col justify-center md:text-right">
                         <div class="md:ml-auto inline-block bg-pink-100 text-pink-600 font-bold px-3 py-1 rounded-full text-xs mb-3 w-fit">STEP 04. Share & Connect</div>
                         <h4 class="text-2xl font-bold text-slate-900 mb-3">커뮤니티 공유 & 원클릭 적용</h4>
                         <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                            시공하지 않아도 됩니다. 내가 만든 디자인을 공유하고, 다른 사용자는 버튼 하나로 그 스타일을 본인의 집(다른 평면도)에 그대로 적용할 수 있습니다.
+                            시공하지 않아도 됩니다. 내가 만든 디자인을 커뮤니티에 공유하고, 
+                            다른 사용자는 버튼 하나로 그 스타일을 본인의 집(다른 평면도)에 그대로 적용할 수 있습니다.
                         </p>
+                        <!-- Deep Tech Box -->
                         <div class="bg-slate-900 rounded-xl p-5 border border-slate-700 shadow-lg relative overflow-hidden text-left">
                             <div class="absolute top-0 right-0 bg-pink-600 text-white text-[10px] px-2 py-1 font-bold rounded-bl">Deep Tech Strategy</div>
                             <div class="space-y-3">
-                                <div><div class="text-pink-400 text-xs font-bold mb-1"><i class="fas fa-wand-magic-sparkles mr-1"></i> Style Transfer</div><p class="text-slate-400 text-[11px]">다른 집의 디자인 요소를 내 집 도면 구조에 맞게 자동으로 재배치</p></div>
-                                <div><div class="text-slate-300 text-xs font-bold mb-1"><i class="fas fa-network-wired mr-1"></i> Network Effect</div><p class="text-slate-400 text-[11px]">공유된 디자인 데이터가 쌓일수록 AI의 추천 성능 향상</p></div>
+                                <div><div class="text-pink-400 text-xs font-bold mb-1"><i class="fas fa-wand-magic-sparkles mr-1"></i> Style Transfer</div><p class="text-slate-400 text-[11px]">다른 집의 디자인 요소를 내 집 도면 구조에 맞게 자동으로 재배치하는 기술</p></div>
+                                <div><div class="text-slate-300 text-xs font-bold mb-1"><i class="fas fa-network-wired mr-1"></i> Network Effect</div><p class="text-slate-400 text-[11px]">공유된 디자인 데이터가 쌓일수록 AI의 추천 성능이 향상</p></div>
                             </div>
                         </div>
                     </div>
+                    <!-- Visual -->
                     <div class="w-full md:w-7/12 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-2 relative grid grid-cols-2 gap-2">
-                        <div class="relative rounded-lg overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"><div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded">Source</div></div>
-                        <div class="relative rounded-lg overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-pink-500/20 flex items-center justify-center"><span class="bg-pink-600 text-white text-xs px-3 py-1.5 rounded-full shadow-lg font-bold"><i class="fas fa-magic mr-1"></i> Applied!</span></div><div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded">My Home</div></div>
+                        <div class="relative rounded-lg overflow-hidden h-40">
+                            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded">Source</div>
+                        </div>
+                        <div class="relative rounded-lg overflow-hidden h-40">
+                            <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-pink-500/20 flex items-center justify-center">
+                                <span class="bg-pink-600 text-white text-xs px-3 py-1.5 rounded-full shadow-lg font-bold"><i class="fas fa-magic mr-1"></i> Applied!</span>
+                            </div>
+                            <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded">My Home</div>
+                        </div>
                         <div class="col-span-2 text-center pt-2"><p class="text-xs text-slate-500">"다른 유저의 스타일을 내 집에 적용했습니다."</p></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -251,28 +298,50 @@ PE html>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Deep Tech가 만드는 격차</h3>
                 <p class="text-slate-400">단순한 매칭 플랫폼이 아닙니다. <br>물리학 기반 신경망(PINN)과 독점적 데이터 파이프라인으로 기술 장벽을 구축합니다.</p>
             </div>
+
+            <!-- Tech Pipeline Flow -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative mb-12">
+                <!-- Stage 1 -->
                 <div class="tech-card bg-white/5 rounded-xl p-6 relative group arrow-connector border border-slate-700 hover:border-blue-500">
-                    <div class="flex items-center justify-between mb-4"><div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400"><i class="fas fa-database text-xl"></i></div><span class="text-xs font-mono text-blue-400 bg-blue-900/50 px-2 py-1 rounded border border-blue-500/30">Input</span></div>
-                    <h4 class="text-lg font-bold text-white mb-2">다크 데이터 확보</h4><p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">수기 도면, 현장 사진 등 버려지던 Dark Data를 AI 학습용 자산으로 전환합니다.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400"><i class="fas fa-database text-xl"></i></div>
+                        <span class="text-xs font-mono text-blue-400 bg-blue-900/50 px-2 py-1 rounded border border-blue-500/30">Input</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">다크 데이터 확보</h4>
+                    <p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">수기 도면, 현장 사진 등 버려지던 <strong>Dark Data</strong>를 AI 학습용 자산으로 전환합니다.</p>
                 </div>
+                <!-- Stage 2 -->
                 <div class="tech-card bg-white/5 rounded-xl p-6 relative group arrow-connector border border-slate-700 hover:border-purple-500">
-                    <div class="flex items-center justify-between mb-4"><div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400"><i class="fas fa-atom text-xl"></i></div><span class="text-xs font-mono text-purple-400 bg-purple-900/50 px-2 py-1 rounded border border-purple-500/30">Modeling</span></div>
-                    <h4 class="text-lg font-bold text-white mb-2">3DGS & PINN</h4><p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">3D Gaussian Splatting으로 초고해상도 복원, PINN으로 물리적 안정성 검증.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400"><i class="fas fa-atom text-xl"></i></div>
+                        <span class="text-xs font-mono text-purple-400 bg-purple-900/50 px-2 py-1 rounded border border-purple-500/30">Modeling</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">3DGS & PINN</h4>
+                    <p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed"><strong>3D Gaussian Splatting</strong>으로 초고해상도 복원, <strong>PINN</strong>으로 물리적 안정성 검증.</p>
                 </div>
+                <!-- Stage 3 -->
                 <div class="tech-card bg-white/5 rounded-xl p-6 relative group arrow-connector border border-slate-700 hover:border-green-500">
-                    <div class="flex items-center justify-between mb-4"><div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400"><i class="fas fa-microchip text-xl"></i></div><span class="text-xs font-mono text-green-400 bg-green-900/50 px-2 py-1 rounded border border-green-500/30">Learning</span></div>
-                    <h4 class="text-lg font-bold text-white mb-2">합성 데이터 생성</h4><p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">가상 시공 시나리오로 Synthetic Data를 무한 생성하여 견적 알고리즘 고도화.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400"><i class="fas fa-microchip text-xl"></i></div>
+                        <span class="text-xs font-mono text-green-400 bg-green-900/50 px-2 py-1 rounded border border-green-500/30">Learning</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">합성 데이터 생성</h4>
+                    <p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">가상 시공 시나리오로 <strong>Synthetic Data</strong>를 무한 생성하여 견적 알고리즘 고도화.</p>
                 </div>
+                <!-- Stage 4 -->
                 <div class="tech-card bg-white/5 rounded-xl p-6 relative group border border-slate-700 hover:border-pink-500">
-                    <div class="flex items-center justify-between mb-4"><div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400"><i class="fas fa-shield-alt text-xl"></i></div><span class="text-xs font-mono text-pink-400 bg-pink-900/50 px-2 py-1 rounded border border-pink-500/30">Moat</span></div>
-                    <h4 class="text-lg font-bold text-white mb-2">독점적 데이터 해자</h4><p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">실측 데이터와 AI 합성 데이터의 결합으로 경쟁사가 넘볼 수 없는 Data Moat 완성.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400"><i class="fas fa-shield-alt text-xl"></i></div>
+                        <span class="text-xs font-mono text-pink-400 bg-pink-900/50 px-2 py-1 rounded border border-pink-500/30">Moat</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">독점적 데이터 해자</h4>
+                    <p class="text-xs text-slate-400 mb-4 h-12 leading-relaxed">실측 데이터와 AI 합성 데이터의 결합으로 경쟁사가 넘볼 수 없는 <strong>Data Moat</strong> 완성.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Simulation Demo Section (Fixed) -->
+    <!-- Simulation Demo Section (Fixed: Demo) -->
     <section id="simulation" class="py-24 bg-slate-900 relative overflow-hidden border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-16">
@@ -293,14 +362,14 @@ PE html>
                                 <div class="bg-slate-700/50 rounded-lg p-1 border border-slate-600 flex flex-col relative overflow-hidden">
                                     <span class="text-xs text-slate-400 mb-1 px-1">Original 2D Plan</span>
                                     <div class="flex-1 bg-white rounded flex items-center justify-center overflow-hidden relative">
-                                        <img src="plan.png" class="absolute top-0 left-0 w-1/2 h-full object-cover opacity-80" alt="2D Plan">
+                                        <img src="https://images.unsplash.com/photo-1599809275372-baba0010cb28?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80">
                                         <div class="scan-line"></div>
                                     </div>
                                 </div>
                                 <div class="bg-gradient-to-br from-blue-900/50 to-purple-900/50 rounded-lg p-1 border border-blue-500/30 flex flex-col relative overflow-hidden">
                                     <span class="text-xs text-blue-300 mb-1 px-1">3D Generated Model</span>
                                     <div class="flex-1 relative bg-black rounded overflow-hidden">
-                                        <img src="render.jpg" class="flex-1 relative bg-black rounded overflow-hidden h-full object-cover" alt="3D Generated Model">
+                                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
                                     </div>
                                 </div>
                             </div>
@@ -311,13 +380,13 @@ PE html>
         </div>
     </section>
 
-    <!-- ★ SEPARATED SECTION: Revenue Model (UPDATED with DATA Evidence) ★ -->
+    <!-- ★ SEPARATED SECTION: Revenue Model (UPDATED) ★ -->
     <section id="revenue-model" class="py-24 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-blue-600 font-bold tracking-wide uppercase text-sm mb-3">Sustainable Revenue Model</h2>
                 <h3 class="text-3xl font-bold text-slate-900">수익 모델 (BM)</h3>
-                <p class="text-slate-600 mt-4 max-w-2xl mx-auto">시장 데이터를 기반으로 산출된 현실적이고 공격적인 수익 모델입니다.</p>
+                <p class="text-slate-600 mt-4 max-w-2xl mx-auto">무료 서비스로 데이터를 확보하고, B2B/B2G 파트너십으로 수익을 창출합니다.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -325,11 +394,10 @@ PE html>
                 <div class="bg-white p-6 rounded-xl border border-slate-200 hover:shadow-lg transition flex flex-col">
                     <div class="text-3xl mb-4">👥</div>
                     <h4 class="font-bold text-lg mb-2">일반 사용자 (Free)</h4>
-                    <p class="text-sm text-slate-500 flex-1 mb-4">저화질 렌더링 및 기본 디자인 무료 제공<br>(오늘의집/아키스케치 벤치마킹)</p>
-                    <div class="mt-auto pt-4 border-t border-slate-100">
+                    <p class="text-sm text-slate-500 flex-1">저화질 렌더링 및 기본 디자인 기능 무료 제공 (오늘의집/아키스케치 벤치마킹)</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100">
                         <span class="text-xs font-bold text-blue-600 uppercase">Target MAU</span>
-                        <p class="bm-highlight mt-1 text-xl">월간 300,000 명</p>
-                        <span class="text-[10px] text-slate-400 block mt-1">* 오늘의집 MAU(540만)의 5% 타겟팅</span>
+                        <p class="bm-highlight mt-1 text-xl">300,000 명</p>
                     </div>
                 </div>
 
@@ -338,11 +406,10 @@ PE html>
                     <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] px-2 py-1 rounded-bl">Main Revenue</div>
                     <div class="text-3xl mb-4">💼</div>
                     <h4 class="font-bold text-lg mb-2 text-blue-900">파트너 구독 & 수수료</h4>
-                    <p class="text-sm text-blue-700 flex-1 mb-4">시공사/자재사 대상 등급별 구독료 및 입찰 수수료 (전체 시장 점유율 30% 목표)</p>
-                    <div class="mt-auto pt-4 border-t border-blue-200">
+                    <p class="text-sm text-blue-700 flex-1">시공사/자재사 대상 등급별 구독료 및 입찰 수수료 (전체 시장 점유율 30% 목표)</p>
+                    <div class="mt-4 pt-4 border-t border-blue-200">
                         <span class="text-xs font-bold text-blue-800 uppercase">Projected Revenue</span>
-                        <p class="bm-highlight mt-1 text-2xl text-red-600">연 50억 원</p>
-                        <span class="text-[10px] text-blue-400 block mt-1">* 국내 인테리어 시장 41.5조 중 플랫폼 점유율 추산</span>
+                        <p class="bm-highlight mt-1 text-2xl text-red-600">월 500억 원</p>
                     </div>
                 </div>
 
@@ -350,11 +417,11 @@ PE html>
                 <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 text-white hover:shadow-lg transition flex flex-col">
                     <div class="text-3xl mb-4">🏗️</div>
                     <h4 class="font-bold text-lg mb-2">B2B Enterprise</h4>
-                    <p class="text-sm text-slate-400 flex-1 mb-4">대형 건설사 신축 아파트 마이너스 옵션 연간 계약</p>
-                    <div class="mt-auto pt-4 border-t border-slate-700">
+                    <p class="text-sm text-slate-400 flex-1">대형 건설사 신축 아파트 마이너스 옵션 연간 계약</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700">
                         <span class="text-xs font-bold text-purple-400 uppercase">Total Available Market</span>
                         <p class="bm-highlight mt-1 text-xl text-purple-300">연 80억 원</p>
-                        <span class="text-[10px] text-slate-500 block mt-1">* 신축 40만호 x 세대당 솔루션 비용 2만원</span>
+                        <span class="text-[10px] text-slate-500 block">(40만호 * 2만원 기준)</span>
                     </div>
                 </div>
 
@@ -362,48 +429,18 @@ PE html>
                 <div class="bg-white p-6 rounded-xl border border-slate-200 hover:shadow-lg transition flex flex-col">
                     <div class="text-3xl mb-4">📺</div>
                     <h4 class="font-bold text-lg mb-2">기타 광고 수익</h4>
-                    <p class="text-sm text-slate-500 flex-1 mb-4">가구/자재 업체의 타겟팅 네이티브 광고 수수료</p>
-                    <div class="mt-auto pt-4 border-t border-slate-100">
+                    <p class="text-sm text-slate-500 flex-1">가구/자재 업체의 타겟팅 네이티브 광고 수수료</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100">
                         <span class="text-xs font-bold text-green-600 uppercase">Estimated</span>
                         <p class="bm-highlight mt-1 text-xl text-green-600">연 200억 원</p>
-                        <span class="text-[10px] text-slate-400 block mt-1">* 트래픽 기반 CTR 예상 수익</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ★ NEW: Market Evidence Section (Data Graph) ★ -->
-    <section id="market-evidence" class="py-12 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4">
-             <div class="text-center mb-8">
-                <h3 class="text-lg font-bold text-slate-700">수익 산출 근거 (Revenue Basis)</h3>
-                <p class="text-xs text-slate-500">한국건설산업연구원(CERIK) 및 통계청 데이터 기반 추정</p>
-            </div>
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <div class="w-full md:w-1/2 bg-white p-4 rounded-xl shadow-sm h-64 flex items-center justify-center">
-                     <canvas id="marketChart"></canvas>
-                </div>
-                <div class="w-full md:w-1/2 space-y-4">
-                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex justify-between items-center">
-                        <span class="text-sm font-bold text-slate-600">국내 인테리어 시장 규모</span>
-                        <span class="text-blue-600 font-black">41.5조 원 <span class="text-xs font-normal text-slate-400">(2025E)</span></span>
-                    </div>
-                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex justify-between items-center">
-                        <span class="text-sm font-bold text-slate-600">프롭테크 시장 성장률 (CAGR)</span>
-                        <span class="text-green-600 font-black">18.5% <span class="text-xs font-normal text-slate-400">(매년)</span></span>
-                    </div>
-                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex justify-between items-center">
-                         <span class="text-sm font-bold text-slate-600">인테리어 DX(디지털전환)율</span>
-                        <span class="text-purple-600 font-black">&lt; 5% <span class="text-xs font-normal text-slate-400">(높은 잠재력)</span></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ★ SEPARATED: Growth Strategy (Roadmap with Arrows) ★ -->
-    <section id="growth-roadmap" class="py-24 bg-white">
+    <!-- ★ SEPARATED: Growth Strategy (Roadmap with Year Bars) ★ -->
+    <section id="growth-roadmap" class="py-24 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-blue-600 font-bold tracking-wide uppercase text-sm mb-3">Growth Strategy</h2>
@@ -423,12 +460,13 @@ PE html>
                             <span class="bg-slate-100 text-slate-600 text-xs font-bold px-2 py-1 rounded">기반 구축</span>
                         </div>
                         <h4 class="text-lg font-bold text-slate-900 mb-4">예비창업패키지</h4>
-                        
-                        <!-- Flow Arrow (Start) -->
-                        <div class="flex items-center justify-center mb-4">
-                             <div class="w-full h-1 bg-blue-100 relative"><div class="absolute left-0 top-0 h-full bg-blue-500 w-1/3"></div></div>
+                        <div class="year-bar">2026년</div>
+                        <!-- Graph Bar -->
+                        <div class="h-16 flex items-end mb-4 space-x-1 border-b border-slate-100 pb-2">
+                            <div class="w-full bg-slate-200 rounded-t h-[20%] relative group">
+                                <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition">Pre-Rev</span>
+                            </div>
                         </div>
-
                         <ul class="text-xs text-slate-600 space-y-2 mt-auto">
                             <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1"><strong>Two-Track:</strong> 외주+자체개발</span></li>
                             <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">DB 1만건 / 유저 1천명</span></li>
@@ -443,14 +481,15 @@ PE html>
                             <span class="bg-blue-100 text-blue-600 text-xs font-bold px-2 py-1 rounded">시장 진입</span>
                         </div>
                         <h4 class="text-lg font-bold text-slate-900 mb-4">초기창업패키지</h4>
-                         <!-- Flow Arrow (Mid) -->
-                        <div class="flex items-center justify-center mb-4">
-                             <div class="w-full h-1 bg-blue-100 relative"><div class="absolute left-0 top-0 h-full bg-blue-600 w-2/3"></div></div>
+                        <div class="year-bar" style="background: linear-gradient(90deg, #60A5FA 0%, #2563EB 100%);">2027년</div>
+                        <div class="h-16 flex items-end mb-4 space-x-1 border-b border-slate-100 pb-2">
+                            <div class="w-full bg-blue-500 rounded-t h-[40%] relative group animate-grow">
+                                <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-blue-600">15억</span>
+                            </div>
                         </div>
                         <ul class="text-xs text-slate-600 space-y-2 mt-auto">
                             <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">파트너사 100개 확보</span></li>
                             <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">전자계약 상용화</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-blue-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1"><strong>매출 15억</strong> 달성</span></li>
                         </ul>
                         <!-- Arrow -->
                         <div class="hidden md:flex absolute top-1/2 -right-3 w-6 h-6 bg-white border border-slate-300 rounded-full items-center justify-center z-20 text-slate-400 shadow-sm"><i class="fas fa-chevron-right text-xs"></i></div>
@@ -462,14 +501,15 @@ PE html>
                             <span class="bg-indigo-100 text-indigo-600 text-xs font-bold px-2 py-1 rounded">도약 & 확장</span>
                         </div>
                         <h4 class="text-lg font-bold text-slate-900 mb-4">TIPS & Series A</h4>
-                         <!-- Flow Arrow (High) -->
-                        <div class="flex items-center justify-center mb-4">
-                             <div class="w-full h-1 bg-indigo-100 relative"><div class="absolute left-0 top-0 h-full bg-indigo-600 w-full"></div></div>
+                        <div class="year-bar" style="background: linear-gradient(90deg, #818CF8 0%, #4F46E5 100%);">2028년</div>
+                        <div class="h-16 flex items-end mb-4 space-x-1 border-b border-slate-100 pb-2">
+                            <div class="w-full bg-indigo-500 rounded-t h-[70%] relative group animate-grow" style="animation-delay: 0.2s;">
+                                <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-indigo-600">50억</span>
+                            </div>
                         </div>
                         <ul class="text-xs text-slate-600 space-y-2 mt-auto">
                             <li class="flex items-start"><i class="fas fa-check text-indigo-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">대형 건설사 B2B 계약</span></li>
                             <li class="flex items-start"><i class="fas fa-check text-indigo-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">글로벌 SaaS 출시</span></li>
-                            <li class="flex items-start"><i class="fas fa-check text-indigo-500 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1"><strong>매출 50억</strong> 달성</span></li>
                         </ul>
                         <!-- Arrow -->
                         <div class="hidden md:flex absolute top-1/2 -right-3 w-6 h-6 bg-white border border-slate-300 rounded-full items-center justify-center z-20 text-slate-400 shadow-sm"><i class="fas fa-chevron-right text-xs"></i></div>
@@ -481,14 +521,15 @@ PE html>
                             <span class="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded">Global Unicorn</span>
                         </div>
                         <h4 class="text-lg font-bold text-white mb-4">IPO & Scale-up</h4>
-                         <!-- Flow Arrow (Full) -->
-                        <div class="flex items-center justify-center mb-4">
-                             <div class="w-full h-1 bg-white/20 relative"><div class="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-500 to-pink-500 w-full"></div></div>
+                        <div class="year-bar" style="background: linear-gradient(90deg, #7C3AED 0%, #DB2777 100%);">2029년 이후</div>
+                        <div class="h-16 flex items-end mb-4 space-x-1 border-b border-slate-600 pb-2">
+                            <div class="w-full bg-gradient-to-t from-purple-600 to-blue-500 rounded-t h-[100%] relative group animate-grow" style="animation-delay: 0.4s;">
+                                <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-white">150억+</span>
+                            </div>
                         </div>
                         <ul class="text-xs text-slate-300 space-y-2 mt-auto flex flex-col">
                             <li class="flex items-start"><i class="fas fa-star text-yellow-400 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">아시아/북미 시장 확장</span></li>
                             <li class="flex items-start"><i class="fas fa-star text-yellow-400 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1">인테리어 표준 OS 등극</span></li>
-                             <li class="flex items-start"><i class="fas fa-star text-yellow-400 mt-0.5 mr-1.5 flex-shrink-0"></i><span class="flex-1"><strong>매출 150억+</strong> 목표</span></li>
                         </ul>
                     </div>
 
@@ -556,27 +597,6 @@ PE html>
 
         // Animation & Sim Loop
         document.addEventListener('DOMContentLoaded', () => {
-            // Chart.js
-            const ctx = document.getElementById('marketChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['2022', '2023', '2024', '2025(E)'],
-                    datasets: [{
-                        label: '시장 규모 (단위: 조 원)',
-                        data: [35.2, 37.8, 39.5, 41.5],
-                        backgroundColor: ['#CBD5E1', '#94A3B8', '#60A5FA', '#2563EB'],
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: false, min: 30 } }
-                }
-            });
-
             const demoOverlay = document.getElementById('demo-overlay');
             if(demoOverlay) {
                 setInterval(() => {
@@ -586,3 +606,5 @@ PE html>
             }
         });
     </script>
+</body>
+</html>
